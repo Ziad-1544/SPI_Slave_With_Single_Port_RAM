@@ -10,15 +10,13 @@ sim:/SPI_tb/DUT/ns \
 sim:/SPI_tb/receive_from_master/Parallel_data_in_tb \
 sim:/SPI_tb/DUT/MOSI \
 sim:/SPI_tb/DUT/cycle_counter_SER_TO_PAR \
-sim:/SPI_tb/DUT/Parallel_data_in \
-sim:/SPI_tb/DUT/data_ready_to_ram \
-sim:/SPI_tb/DUT/cycle_counter_PAR_TO_SER \
-sim:/SPI_tb/DUT/Parallel_data_out \
-sim:/SPI_tb/DUT/data_out_to_master \
-sim:/SPI_tb/DUT/is_address_received \
-sim:/SPI_tb/DUT/MISO \
 sim:/SPI_tb/DUT/rx_data \
 sim:/SPI_tb/DUT/rx_valid \
+sim:/SPI_tb/DUT/cycle_counter_PAR_TO_SER \
+sim:/SPI_tb/DUT/Parallel_data_out \
+sim:/SPI_tb/DUT/data_received \
+sim:/SPI_tb/DUT/is_address_received \
+sim:/SPI_tb/DUT/MISO \
 sim:/SPI_tb/DUT/tx_data \
 sim:/SPI_tb/DUT/tx_valid 
 run -all
