@@ -8,7 +8,7 @@ module RAM_tb();
     logic[4:0] Error_counter,correct_counter;
     //instantiation 
     RAM DUT (
-        .CLK(CLK),
+        .clk(CLK),
         .rst_n(rst_n),
         .din(din),
         .rx_valid(rx_valid),
@@ -22,80 +22,84 @@ module RAM_tb();
             #1 CLK = ~CLK ;
         end
     end
-    integer i;
     initial begin
         Error_counter=0;
         correct_counter=0;
         reset();
-        $display("Random read addresses before intializing the memory  ") ;
-        for (i = 1 ;i<256 ;i+=8 ) begin
-            rx_valid = 1;
-            din = {2'b10,i};
-            @(negedge CLK);
-            rx_valid = 0 ;
-            @(negedge CLK);
-            if (tx_valid && dout != 0) begin
-                    $display("Error in data when tx_valid i=%d: dout =%b",i,dout);
-                    Error_counter = Error_counter + 1; 
-            end else begin
-                $display("case i=%d valid ",dout);
-                    correct_counter= correct_counter + 1; 
-            end
-
-        end
         //intialize the memory
-        $readmemh("mem.dat",m1.mem);
+        $readmemb("mem.dat",DUT.memory);
         $display("testing reading after intialization ") ;
             rx_valid = 1;
-            din = {2'b10,2};
+            din = {2'b10,8'b0000_0010};
             @(negedge CLK);
             rx_valid = 0 ;
             @(negedge CLK);
-            if (tx_valid && dout != 'b0011_0011) begin
-                    $display("Error in data when tx_valid case 1: dout =%b",dout);
-                    Error_counter = Error_counter + 1; 
-            end else begin
-                $display("case 1 valid ",dout);
+            rx_valid = 1;
+            din = {2'b11,8'b0000_0010};
+            @(negedge CLK);
+            rx_valid = 0 ;
+            @(negedge CLK);
+            if (tx_valid && dout == 'b0011_0011) begin
+                    $display("case 1 valid ",dout);
                     correct_counter= correct_counter + 1; 
+            end else begin
+                $display("Error in data when tx_valid case 1: dout =%b",dout);
+                Error_counter = Error_counter + 1;
             end
             //-----------------
             rx_valid = 1;
-            din = {2'b10,100};
+            din = {2'b10,8'b0110_0100};
             @(negedge CLK);
             rx_valid = 0 ;
             @(negedge CLK);
-            if (tx_valid && dout != 'b1010_1001) begin
-                    $display("Error in data when tx_valid case 2: dout =%b",dout);
-                    Error_counter = Error_counter + 1; 
-            end else begin
-                $display("case 2 valid ", dout);
+            rx_valid = 1;
+            din = {2'b11,8'b0000_0010};
+            @(negedge CLK);
+            rx_valid = 0 ;
+            @(negedge CLK);
+            if (tx_valid && dout == 'b1010_1001) begin
+                    $display("case 2 valid ", dout);
                     correct_counter= correct_counter + 1; 
+            end else begin
+                $display("Error in data when tx_valid case 2: dout =%b",dout);
+                Error_counter = Error_counter + 1; 
             end
             //----------------
             rx_valid = 1;
-            din = {2'b10,175};
+            din = {2'b10,8'b1010_1111};
             @(negedge CLK);
             rx_valid = 0 ;
             @(negedge CLK);
-            if (tx_valid && dout != 'b0000_1111) begin
-                    $display("Error in data when tx_valid case 3: dout =%b",dout);
-                    Error_counter = Error_counter + 1; 
-            end else begin
-                $display("case 3 valid ", dout);
+            rx_valid = 1;
+            din = {2'b11,8'b0000_0010};
+            @(negedge CLK);
+            rx_valid = 0 ;
+            @(negedge CLK);
+            if (tx_valid && dout == 'b0000_1111) begin
+                      $display("case 3 valid ", dout);
                     correct_counter= correct_counter + 1; 
+            end else begin
+                $display("Error in data when tx_valid case 3: dout =%b",dout);
+                    Error_counter = Error_counter + 1; 
+              
             end
             //----------------
             rx_valid = 1;
-            din = {2'b10,250};
+            din = {2'b10,8'b1111_1010};
             @(negedge CLK);
             rx_valid = 0 ;
             @(negedge CLK);
-            if (tx_valid && dout != 'b1010_1001) begin
-                    $display("Error in data when tx_valid case 4: dout =%b",dout);
-                    Error_counter = Error_counter + 1; 
-            end else begin
-                $display("case 4 valid ", dout);
+            rx_valid = 1;
+            din = {2'b11,8'b0000_0010};
+            @(negedge CLK);
+            rx_valid = 0 ;
+            @(negedge CLK);
+            if (tx_valid && dout == 'b1010_1001) begin
+                    $display("case 4 valid ", dout);
                     correct_counter= correct_counter + 1; 
+            end else begin
+                $display("Error in data when tx_valid case 4: dout =%b",dout);
+                    Error_counter = Error_counter + 1; 
             end
             //---------------------------------------------------------------------------------------------------------
             $display("Full normal scenario test");
@@ -119,12 +123,12 @@ module RAM_tb();
             @(negedge CLK);
             rx_valid = 0 ;
             @(negedge CLK);
-            if (tx_valid && dout != 'b1111_0000) begin
-                    $display("Error in data when tx_valid case 4: dout =%b",dout);
-                    Error_counter = Error_counter + 1; 
-            end else begin
-                $display("case 4 valid ", dout);
+            if (tx_valid && dout == 'b1111_0000) begin
+                    $display("case 4 valid ", dout);
                     correct_counter= correct_counter + 1; 
+            end else begin
+                $display("Error in data when tx_valid case 4: dout =%b",dout);
+                    Error_counter = Error_counter + 1; 
             end
             $display("Correct Counter =%d , Error Counter =%d",correct_counter,Error_counter);
             $stop;
@@ -137,5 +141,6 @@ module RAM_tb();
         rst_n = 0;
         @(negedge CLK);
         rst_n = 1;
+        @(negedge CLK);
     endtask
 endmodule
