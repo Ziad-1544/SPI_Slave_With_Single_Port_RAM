@@ -5,6 +5,7 @@ module SPI#(
     input MOSI ,SS_n, CLK , rst_n,
     output MISO 
 );
+(*fsm_encoding ="one_hot"*)
     wire [7:0] tx_data ; 
     wire [9:0] rx_data ; 
     wire rx_valid, tx_valid;

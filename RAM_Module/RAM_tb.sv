@@ -38,7 +38,6 @@ module RAM_tb();
             din = {2'b11,8'b0000_0010};
             @(negedge CLK);
             rx_valid = 0 ;
-            @(negedge CLK);
             if (tx_valid && dout == 'b0011_0011) begin
                     $display("case 1 valid ",dout);
                     correct_counter= correct_counter + 1; 
@@ -56,7 +55,6 @@ module RAM_tb();
             din = {2'b11,8'b0000_0010};
             @(negedge CLK);
             rx_valid = 0 ;
-            @(negedge CLK);
             if (tx_valid && dout == 'b1010_1001) begin
                     $display("case 2 valid ", dout);
                     correct_counter= correct_counter + 1; 
@@ -74,7 +72,6 @@ module RAM_tb();
             din = {2'b11,8'b0000_0010};
             @(negedge CLK);
             rx_valid = 0 ;
-            @(negedge CLK);
             if (tx_valid && dout == 'b0000_1111) begin
                       $display("case 3 valid ", dout);
                     correct_counter= correct_counter + 1; 
@@ -93,7 +90,6 @@ module RAM_tb();
             din = {2'b11,8'b0000_0010};
             @(negedge CLK);
             rx_valid = 0 ;
-            @(negedge CLK);
             if (tx_valid && dout == 'b1010_1001) begin
                     $display("case 4 valid ", dout);
                     correct_counter= correct_counter + 1; 
@@ -122,7 +118,6 @@ module RAM_tb();
             din = 10'b11_1010_1010;
             @(negedge CLK);
             rx_valid = 0 ;
-            @(negedge CLK);
             if (tx_valid && dout == 'b1111_0000) begin
                     $display("case 4 valid ", dout);
                     correct_counter= correct_counter + 1; 

@@ -20,7 +20,6 @@ module SPI_Slave #(
 );
 ////////////////////////////////////////////////////////////////////// Variables //////////////////////////////////////////////////////////////////////////////////////
 // State Variables 
-(* fsm_encoding = "gray" *)
 reg [2:0] cs,ns;
 
 //Global Variables
@@ -104,11 +103,6 @@ always @(posedge CLK) begin
         MISO        <= 0 ;
         rx_valid    <= 0 ;
         rx_data     <= 0 ;
-        //some internal signals 
-        is_address_received         <= 0 ;
-        Parallel_data_out           <= 0 ;
-        cycle_counter_PAR_TO_SER    <= 0 ;
-        cycle_counter_SER_TO_PAR    <= 0 ;
     end
     else begin
         if (SS_n) begin
@@ -124,6 +118,16 @@ always @(posedge CLK) begin
         end 
     end
 end    
+// To reset this internal signal 
+always @(posedge CLK) begin
+    if(~rst_n)begin
+        is_address_received         <= 0 ;
+        Parallel_data_out           <= 0 ;
+        cycle_counter_PAR_TO_SER    <= 0 ;
+        cycle_counter_SER_TO_PAR    <= 0 ;
+
+    end
+end
 
 ////////////////////////////////////////////////////////////////////// Tasks //////////////////////////////////////////////////////////////////////////////////////
 task SER_TO_PAR();
@@ -134,12 +138,8 @@ begin
     end
     if (cycle_counter_SER_TO_PAR == 9) begin
         rx_valid <= 1;
-        if (cs == READ_ADD)begin
-            is_address_received <= 1;
-        end 
-        else begin
-            is_address_received <= 0;
-        end
+        if (cs == READ_ADD) is_address_received <= 1;
+        else is_address_received <= 0;
     end
 end 
 endtask

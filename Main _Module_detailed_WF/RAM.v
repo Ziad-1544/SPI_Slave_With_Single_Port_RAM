@@ -19,9 +19,7 @@ module RAM #(
             dout <= 0;
             tx_valid <= 0;
             flag_write <= 0;
-            flag_read <= 0;
-            RD_address_bus <= 0;
-            WR_address_bus <= 0;      
+            flag_read <= 0;     
         end 
         else begin
             tx_valid <= 0; // Ensure tx_valid is cleared at the start of each clock cycle
