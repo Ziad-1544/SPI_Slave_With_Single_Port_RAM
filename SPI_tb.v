@@ -38,9 +38,8 @@ module SPI_slave_tb ();
         
         // Checking write address functionality and SS_n = 1
         SS_n = 1;
-        MOSI = 0;
         parallel_data_holder = 10'b00_1101_0100;
-        // @(negedge CLK);
+        @(negedge CLK);
         for (counter = 9; counter >= 0; counter = counter - 1) begin
             MOSI = parallel_data_holder[counter];
             @(negedge CLK);
@@ -49,9 +48,8 @@ module SPI_slave_tb ();
         
         // Checking write address functionality and SS_n = 0
         SS_n = 0;
-        MOSI = 0;
+        @(negedge CLK);
         parallel_data_holder = 10'b00_1101_0100;
-        // @(negedge CLK);
         for (counter = 9; counter >= 0; counter = counter - 1) begin
             MOSI = parallel_data_holder[counter];
             @(negedge CLK);
@@ -63,9 +61,8 @@ module SPI_slave_tb ();
         
         // Checking write data functionality and SS_n = 0
         SS_n = 0;
-        MOSI = 0;
+        @(negedge CLK);
         parallel_data_holder = 10'b01_1111_0010;
-        // @(negedge CLK);
         for (counter = 9; counter >= 0; counter = counter - 1) begin
             MOSI = parallel_data_holder[counter];
             @(negedge CLK);
@@ -74,28 +71,26 @@ module SPI_slave_tb ();
         @(negedge CLK);
         $stop;
         
-        // // Reading data inside address without sending the address
-        // SS_n = 0;
-        // MOSI = 1;
-        // parallel_data_holder = 10'b11_1010_1100;
-        // // @(negedge CLK);
-        // for (counter = 9; counter >= 0; counter = counter - 1) begin
-        //     MOSI = parallel_data_holder[counter]; // the 
-        //     @(negedge CLK);
-        // end
-        // @(negedge CLK);
-        // for (counter = 9; counter >= 0; counter = counter - 1) begin 
-        //     @(negedge CLK);
-        // end
-        // SS_n = 1;
-        // @(negedge CLK);
-        // $stop;
+        // Reading data inside address without sending the address
+        SS_n = 0;
+        @(negedge CLK);
+        parallel_data_holder = 10'b11_1010_1100;
+        for (counter = 9; counter >= 0; counter = counter - 1) begin
+            MOSI = parallel_data_holder[counter]; 
+            @(negedge CLK);
+        end
+        @(negedge CLK);
+        for (counter = 9; counter >= 0; counter = counter - 1) begin 
+            @(negedge CLK);
+        end
+        SS_n = 1;
+        @(negedge CLK);
+        $stop;
         
         // Checking read address functionality and SS_n = 0
         SS_n = 0;
-        MOSI = 1;
+        @(negedge CLK);
         parallel_data_holder = 10'b10_1101_0100;
-        // @(negedge CLK);
         for (counter = 9; counter >= 0; counter = counter - 1) begin
             MOSI = parallel_data_holder[counter];
             @(negedge CLK);
@@ -106,15 +101,17 @@ module SPI_slave_tb ();
         
         // Checking read data functionality and SS_n = 0
         SS_n = 0;
-        MOSI = 1;
+        @(negedge CLK);
         parallel_data_holder = 10'b11_1010_1100;
-        // @(negedge CLK);
         for (counter = 9; counter >= 0; counter = counter - 1) begin
             MOSI = parallel_data_holder[counter];
             @(negedge CLK);
         end
         tx_valid = 1 ; 
         tx_data = 1111_0000 ;
+        @(negedge CLK);
+        tx_valid = 0 ; 
+        @(negedge CLK);
         // for (counter = 7; counter >= 0; counter = counter - 1) begin
         //     MISO = tx_data[counter];
         //     @(negedge CLK);
@@ -129,9 +126,8 @@ module SPI_slave_tb ();
         
         // Turning off SS_n in the middle of the communication
         SS_n = 0;
-        MOSI = 0;
+        @(negedge CLK);
         parallel_data_holder = 10'b00_1101_0100;
-        // @(negedge CLK);
         for (counter = 9; counter >= 0; counter = counter - 1) begin
             MOSI = parallel_data_holder[counter];
             if(counter == 2)
