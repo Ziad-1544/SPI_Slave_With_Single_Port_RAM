@@ -1,4 +1,4 @@
-# 🕸️ SPIder Web Project - SPI Slave with Single Port RAM 🕷️
+# 🕸️ SPIder Web Project - SPI Slave with Single Port RAM🕷️
 
 ## 📌 Project Overview
 Welcome to **SPIder Web Project** – a digital design adventure that implements an **SPI Slave** integrated with **Single Port RAM** using **Verilog** and the **Vivado FPGA Flow**! 🚀
