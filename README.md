@@ -64,9 +64,6 @@ This project successfully demonstrates an SPI-based RAM interface using FPGA log
 
 ---
 
-## 📜 License
-This project is licensed under the **MIT License**. Feel free to use, modify, and distribute it with proper attribution. 📝
-
 ## 👨‍💻 Digital Designers 
 
 | 👨‍💻 Name | 📸 Profile Picture |
@@ -75,4 +72,7 @@ This project is licensed under the **MIT License**. Feel free to use, modify, an
 | [Bassel Mahmoud](https://github.com/basselmahmoud1) | <img src="https://github.com/basselmahmoud1.png" width="150"> |
 
 👨‍🏫 Under the supervision of **Eng. Kareem Wassem**
+
+## 📜 License
+This project is licensed under the **MIT License**. Feel free to use, modify, and distribute it with proper attribution. 📝
 
