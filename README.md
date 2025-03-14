@@ -71,8 +71,8 @@ This project is licensed under the **MIT License**. Feel free to use, modify, an
 
 | 👨‍💻 Name | 📸 Profile Picture |
 |-----------|------------------|
-| [Ziad Kassem](https://github.com/Ziad-1544) | <img src="https://github.com/Ziad-1544.png" width="75"> |
-| [Bassel Mahmoud](https://github.com/basselmahmoud1) | <img src="https://github.com/basselmahmoud1.png" width="75"> |
+| [Ziad Kassem](https://github.com/Ziad-1544) | <img src="https://github.com/Ziad-1544.png" width="150"> |
+| [Bassel Mahmoud](https://github.com/basselmahmoud1) | <img src="https://github.com/basselmahmoud1.png" width="150"> |
 
 👨‍🏫 Under the supervision of **Eng. Kareem Wassem**
 
