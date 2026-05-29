@@ -74,5 +74,5 @@ This project successfully demonstrates an SPI-based RAM interface using FPGA log
 👨‍🏫 Under the supervision of **Eng. Kareem Wassem**
 
 ## 📜 License
-This project is licensed under the **MIT License**. Feel free to use, modify, and distribute it with proper attribution. 📝
+Feel free to use, modify, and distribute it with proper attribution. 📝
 
